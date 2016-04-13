@@ -15,21 +15,51 @@
 
 <body>
 
-      <!-- <h1>Recorder.js simple WAV export example</h1> -->
-      <!-- <p>Make sure you are using a recent version of Google Chrome.</p> -->
-      <p>Also before you enable microphone input either plug in headphones or turn the volume down if you want to avoid ear splitting feedback!</p>
+    <h2> It's Priyanka's birthday on April 15th! </h2>
 
-      <button id="record-button" onclick="startRecording(this);">record</button>
-      <button id="stop-button" onclick="stopRecording(this);" disabled>stop</button>
-      <button id="save-button" onclick="saveRecording(this);" disabled>save</button>
+    <div id="countdown"> - day - hrs - mins - secs </div>
 
-      <div id="recordingslist"></div>
+    <h4> Send your wishes, and your crazy plan for the next year by recording a message! She'll love it! </h4>
 
-      <div id="results"></div>
-      <div id="fb-root"></div>
+    <ol class="section-links" onclick="chooseSection(event)">
+        <li id="item1"> Say Hi! </li>
+        <li id="item2"> Sing the song! </li>
+        <li id="item3"> Take the rapid fire Kapoor quiz! </li>
+     </ol>
 
-      <script src="../dist/all.js"></script>
-      <script src="../dist/recorder.js"></script>
+    <div class="section-contents">
+        <div id="section1" style="display: none;">
+            Announce your arrival to the party, without telling your name. (ex. The Iron Man is here).
+            This will be played in the leadup to the midnight to make her guess who arrived. </div>
+
+        <div id="section2" style="display: none;">
+            <div id="player"></div>
+            <!-- <iframe width="420" height="315" src="https://www.youtube.com/embed/mnj8vhLZtTk" frameborder="0"></iframe> -->
+            Sing the birthday song. The chorus will be played at the midnight on April 15th. (Be creative. You can just beatbox if you like.) </div>
+
+        <div id="section3" style="display: none;">
+            This is the trivia quiz, and will be gifted to her. Answers paper will be out at the stroke of the midnight hour Boston time. </div>
+    </div>
+
+    <div class="buttons">
+
+        <button id="record-button" onclick="startRecording(this);">record</button>
+        <button id="stop-button" onclick="stopRecording(this);" disabled>stop</button>
+        <button id="save-button" onclick="saveRecording(this);" disabled>save</button>
+
+    </div>
+
+    <h4> All Your Messages, so far. </h4>
+
+    <div id="recordingslist"></div>
+    <div id="saved-list"></div>
+
+    <div id="fb-root"></div>
+
+    <script src="../dist/youtube.js"></script>
+    <script src="../dist/all.js"></script>
+    <script src="../dist/countdown.js"></script>
+    <script src="../dist/recorder.js"></script>
 
 </body>
 

@@ -15,13 +15,26 @@ var recordButton = document.getElementById('record-button');
 var stopButton = document.getElementById('stop-button');
 var saveButton = document.getElementById('save-button');
 
-var results = document.getElementById('results');
+var savedList = document.getElementById('saved-list')
 
 var audio_context;
 var recorder;
 var audio_recorded;
+var section = 1;
+
+function chooseSection(e) {
+
+  document.querySelector('#section1').style.display = 'none';
+  document.querySelector('#section2').style.display = 'none';
+  document.querySelector('#section3').style.display = 'none';
+
+  document.querySelector('#section' + e.target.id.slice(-1)).style.display = 'block';
+
+  section = e.target.id.slice(-1);
+}
 
 function startUserMedia(stream) {
+
     var input = audio_context.createMediaStreamSource(stream);
     __log('Media stream created.');
 
@@ -38,6 +51,14 @@ function startRecording(button) {
     stopButton.disabled = false;
     recordButton.disabled = true;
     saveButton.disabled = true;
+
+    recordingslist.innerHTML = '';
+
+    if (section == 2) {
+
+      player1.playVideo();
+    }
+
     __log('Recording...');
 }
 
@@ -50,7 +71,7 @@ function stopRecording(button) {
 
     recorder && recorder.exportWAV(function(blob) {
         var url = URL.createObjectURL(blob);
-        var li = document.createElement('li');
+        var li = document.createElement('div');
         var au = document.createElement('audio');
         au.controls = true;
         au.src = url;
@@ -62,7 +83,7 @@ function stopRecording(button) {
 
 function saveRecording(button) {
 
-    var objKey = 'facebook-' + fbUserId + '/recording' + Date.now();
+    var objKey = 'facebook-' + fbUserId + '/records/' + section + '-' + Date.now();
 
     var params = {
 
@@ -78,7 +99,7 @@ function saveRecording(button) {
 
         if (err) {
 
-            results.innerHTML = 'ERROR: ' + err;
+            console.log('ERROR: ' + err);
 
         } else {
 
@@ -107,7 +128,7 @@ function listObjs() {
 
         if (err) {
 
-            results.innerHTML = 'ERROR: ' + err;
+            console.log('ERROR: ' + err);
 
         } else {
 
@@ -134,18 +155,17 @@ function listObjs() {
 
                     var au = document.createElement('audio');
                     au.id = obj.Key;
-
-                    var play = document.createElement('button');
-                    play.innerHTML = 'Play';
-                    play.setAttribute('onclick', "document.getElementById(\'" + au.id + "\').play()");
-
-                    // au.controls = true;
+                    au.controls = true;
                     au.src = url;
 
                     li.appendChild(au);
-                    li.appendChild(play);
 
-                    recordingslist.appendChild(li);
+                    // var play = document.createElement('button');
+                    // play.innerHTML = 'Play';
+                    // play.setAttribute('onclick', "document.getElementById(\'" + au.id + "\').play()");
+                    // li.appendChild(play);
+
+                    savedList.appendChild(li);
                 });
             });
         }
