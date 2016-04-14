@@ -80,7 +80,10 @@ function listObjs() {
                       var button = document.createElement('button');
                       button.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
 
-                      button.onclick = 'playThree(' + au.id + ')';
+                      button.onclick = function() {
+                          playThree(au.id);
+                      };
+
                       li.appendChild(button);
                     }
 
