@@ -22,10 +22,11 @@ function __log(e, data) {
     // log.innerHTML += "\n" + e + " " + (data || '');
 }
 
+var everything = [];
+
 function listObjs() {
 
     var prefix = '';
-    var everything = [];
 
     bucket.listObjects({
 
@@ -100,6 +101,8 @@ function listObjs() {
                 });
             });
 
+            console.log('everything', everything.length);
+
             // find all the ones
 
             var task_one_entries = everything.filter(function(item) {
@@ -108,17 +111,23 @@ function listObjs() {
               return tasknumber == 1 || tasknumber == '1';
             });
 
+            console.log('one', task_two_entries.length);
+
             var task_two_entries = everything.filter(function(item) {
 
               var tasknumber = item.key.slice(item.key.lastIndexOf('/') + 1, item.key.lastIndexOf('/') + 2);
               return tasknumber == 2 || tasknumber == '2';
             });
 
+            console.log('two', task_two_entries.length);
+
             var task_three_entries = everything.filter(function(item) {
 
               var tasknumber = item.key.slice(item.key.lastIndexOf('/') + 1, item.key.lastIndexOf('/') + 2);
               return tasknumber == 3 || tasknumber == '3';
             });
+
+            console.log('three', task_three_entries.length);
 
 
             var h1 = document.createElement('h2');
@@ -131,13 +140,13 @@ function listObjs() {
             h2.innerHTML = 'Task Two Responses';
             savedList.appendChild(h1);
 
+            task_two_entries.forEach(makeAudio);
+
             var h3 = document.createElement('h2');
             h3.innerHTML = 'Task Three Responses';
             savedList.appendChild(h1);
 
-            savedList.innerHTML += 'Task Three Responses';
-
-            task_one_entries.forEach(makeAudio);
+            task_three_entries.forEach(makeAudio);
         }
     });
 }
