@@ -59,7 +59,7 @@ function listObjs() {
                     // blob.type = "audio/wav";
                     // var url = URL.createObjectURL(blob);
 
-                    // var li = document.createElement('div');
+                    var li = document.createElement('div');
 
                     var sp = document.createElement('span');
                     sp.innerHTML = obj.Key;
