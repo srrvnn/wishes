@@ -206,6 +206,13 @@ html, body {
   margin-bottom: 100px;
 }
 
+#saved-list span:first-child {
+  display: inline-block;
+  height: 42px;
+  vertical-align: top;
+  line-height: 42px;
+}
+
 #saved-list div {
   background: transparent;
   display: inline-block;

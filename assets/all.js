@@ -215,7 +215,7 @@ function listObjs() {
 
                     var sp = document.createElement('span');
                     // sp.innerHTML = obj.Key;
-                    sp.innerHTML = 'Task ' + obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + ':';
+                    sp.innerHTML = 'Task ' + obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + '&mdash;';
 
                     var au = document.createElement('audio');
                     au.id = obj.Key;
