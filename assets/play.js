@@ -147,6 +147,18 @@ function statusChange(response) {
   }
 }
 
+function playTwo() {
+
+  var a = document.querySelectorAll('#test-two > div > audio');
+
+  player1.setVolume(20);
+  player1.playVideo();
+
+  for (var i = 0; i < a.length; i++) {
+    a[i].play();
+  }
+}
+
 window.fbAsyncInit = function() {
     FB.init({
         appId: appId
