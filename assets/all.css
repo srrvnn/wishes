@@ -1,0 +1,186 @@
+html, body {
+
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Schoolbell', cursive;
+}
+
+#container {
+  text-align: center;
+  min-height: 100%;
+  position: relative;
+}
+
+#header {
+   padding: 30px 10px;
+       background: #F64240;
+       color: white;
+
+}
+
+#body {
+   padding:10px;
+   padding-bottom:100px;   /* Height of the footer */
+}
+
+#header h1 {
+
+  background: transparent;
+  line-height: 100px;
+  font-family: 'Over the Rainbow', cursive;
+  font-size: 50px;
+
+}
+
+
+#header h2 {
+  background: transparent;
+
+}
+
+#body h3 {
+
+  padding: 20px 0 5px 0;
+  border-bottom: 1px solid black;
+  width: 250px;
+  margin: 10px auto;
+}
+
+#container #countdown {
+  position:absolute;
+     bottom:0;
+     width:100%;
+     height:100px;   /* Height of the footer */
+     color: #38ACA6;
+     font-weight: bolder;
+     font-family: 'Amatic SC', cursive;
+     font-size: 25px;
+     letter-spacing: 2px;
+}
+
+#countdown-numbers {
+
+  font-size: 36px;
+}
+
+
+.section-links {
+
+  background: transparent;
+  margin: 20px 0;
+
+}
+
+.section-links li {
+
+  background: transparent;
+      display: inline-block;
+      margin: 0 20px;
+      background: #FEDE32;
+      padding: 7px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+
+}
+
+.section-links li.selected {
+
+    border-left: 10px solid red;
+}
+
+  content: '->';
+  position: relative;
+  right: -45px;
+}
+
+.section-links li:after {
+
+  content: '->';
+  position: relative;
+  right: -45px;
+}
+
+.section-links li:last-child:after {
+
+  content: '';
+}
+
+.section-contents {
+
+  background: transparent;
+}
+
+.section-contents div {
+
+  background: transparent;
+  padding: 20px 100px;
+  width: 80%;
+  text-align: center;
+  margin: 30px auto;
+  font-size: 25px;
+  line-height: 55px;
+}
+
+#player1 {
+
+  display: block;
+  margin: 10px auto;
+}
+
+.buttons {
+  background: transparent;
+  height: 250px;
+
+}
+
+.buttons button {
+  background: transparent;
+
+
+}
+
+#recordingslist {
+  background: transparent;
+
+}
+
+#recordingslist > div {
+
+  background: transparent;
+  padding: 15px;
+  background: aliceblue;
+  width: 300px;
+  margin: 0 auto;
+  border-radius: 10px;
+
+}
+
+#recordingslist > div:after {
+
+  content: 'not saved yet. use the save button on the top';
+}
+
+#saved-list {
+  background: transparent;
+  margin: 30px 0;
+  margin-bottom: 100px;
+}
+
+#saved-list div {
+  background: transparent;
+  display: inline-block;
+  margin: 0 10px;
+
+
+}
+
+#saved-list > div > span {
+    display: inline-block;
+    padding: 10px;
+    vertical-align: super;
+    }
+
+#recordingslist {
+    margin: 30px 0;
+}

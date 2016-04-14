@@ -11,9 +11,16 @@ var bucket = new AWS.S3({
     }
 });
 
+var buttons = document.getElementById('buttons');
+var recordings = document.getElementById('recordings');
+
 var recordButton = document.getElementById('record-button');
 var stopButton = document.getElementById('stop-button');
 var saveButton = document.getElementById('save-button');
+
+var intro = document.querySelector('#section0');
+
+var recordingSvg = document.getElementById('recording-svg');
 
 var savedList = document.getElementById('saved-list')
 
@@ -24,11 +31,19 @@ var section = 1;
 
 function chooseSection(e) {
 
+  buttons.style.display = 'block';
+  intro.style.display = 'none';
+
   document.querySelector('#section1').style.display = 'none';
   document.querySelector('#section2').style.display = 'none';
   document.querySelector('#section3').style.display = 'none';
 
+  document.querySelector('#item1').className = '';
+  document.querySelector('#item2').className = '';
+  document.querySelector('#item2').className = '';
+
   document.querySelector('#section' + e.target.id.slice(-1)).style.display = 'block';
+  document.querySelector('#item' + e.target.id.slice(-1)).className = "selected";
 
   section = e.target.id.slice(-1);
 }
@@ -47,6 +62,9 @@ function startUserMedia(stream) {
 }
 
 function startRecording(button) {
+
+    recordingSvg.style.display = 'block';
+
     recorder && recorder.record();
     stopButton.disabled = false;
     recordButton.disabled = true;
@@ -63,6 +81,10 @@ function startRecording(button) {
 }
 
 function stopRecording(button) {
+
+    recordings.style.display = 'block';
+    recordingSvg.style.display = 'none';
+
     recorder && recorder.stop();
     stopButton.disabled = true;
     recordButton.disabled = false;
@@ -82,6 +104,8 @@ function stopRecording(button) {
 }
 
 function saveRecording(button) {
+
+    recordingslist.innerHTML = '';
 
     var objKey = 'facebook-' + fbUserId + '/records/' + section + '-' + Date.now();
 
@@ -118,6 +142,8 @@ function __log(e, data) {
 
 function listObjs() {
 
+    savedList.innerHTML = 'Nothing saved, yet.';
+
     var prefix = 'facebook-' + fbUserId;
 
     bucket.listObjects({
@@ -145,6 +171,10 @@ function listObjs() {
 
                 }, function(err, data) {
 
+                    if (savedList.innerHTML == 'Nothing saved, yet.') {
+                        savedList.innerHTML == '';
+                    }
+
                     if (err || data === null) return;
 
                     var blob = new Blob([data.Body.buffer]);
@@ -153,11 +183,16 @@ function listObjs() {
                     var url = URL.createObjectURL(blob);
                     var li = document.createElement('div');
 
+                    var sp = document.createElement('span');
+                    // sp.innerHTML = obj.Key;
+                    sp.innerHTML = obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + '.';
+
                     var au = document.createElement('audio');
                     au.id = obj.Key;
                     au.controls = true;
                     au.src = url;
 
+                    li.appendChild(sp);
                     li.appendChild(au);
 
                     // var play = document.createElement('button');

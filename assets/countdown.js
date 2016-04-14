@@ -12,7 +12,7 @@ function showRemaining() {
     if (distance < 0) {
 
         clearInterval(timer);
-        document.getElementById('countdown').innerHTML = 'EXPIRED!';
+        document.getElementById('countdown-numbers').innerHTML = 'EXPIRED!';
 
         return;
     }
@@ -21,10 +21,10 @@ function showRemaining() {
     var minutes = Math.floor((distance % _hour) / _minute);
     var seconds = Math.floor((distance % _minute) / _second);
 
-    document.getElementById('countdown').innerHTML = days + 'day ';
-    document.getElementById('countdown').innerHTML += hours + 'hrs ';
-    document.getElementById('countdown').innerHTML += minutes + 'mins ';
-    document.getElementById('countdown').innerHTML += seconds + 'secs';
+    document.getElementById('countdown-numbers').innerHTML = days + ' day &mdash; ';
+    document.getElementById('countdown-numbers').innerHTML += hours + ' hrs &mdash; ';
+    document.getElementById('countdown-numbers').innerHTML += minutes + ' mins &mdash;  ';
+    document.getElementById('countdown-numbers').innerHTML += seconds + ' secs';
 }
 
 timer = setInterval(showRemaining, 0);

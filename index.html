@@ -1,65 +1,85 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title> Wish Priyanka! </title>
+    <title> It's Kapoor's Birthday! </title>
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
-    <style>
-
-        #recordingslist {
-
-            margin: 30px 0;
-        }
-
-    </style>
+    <link href="assets/all.css" rel="stylesheet">
+    <link href="assets/ripple.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Schoolbell|Amatic+SC:700|Over+the+Rainbow' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
 
-    <h2> It's Priyanka's birthday on April 15th! </h2>
+    <div id="container">
 
-    <div id="countdown"> - day - hrs - mins - secs </div>
+      <div id="header">
 
-    <h4> Send your wishes, and your crazy plan for the next year by recording a message! She'll love it! </h4>
+        <h1> It's Kapoor's birthday!! This friday, April 15th! </h1>
 
-    <ol class="section-links" onclick="chooseSection(event)">
-        <li id="item1"> Say Hi! </li>
-        <li id="item2"> Sing the song! </li>
-        <li id="item3"> Take the rapid fire Kapoor quiz! </li>
-     </ol>
+        <h2> Send your wishes, and love by recording a message! She is going to love it! </h2>
 
-    <div class="section-contents">
-        <div id="section1" style="display: none;">
-            Announce your arrival to the party, without telling your name. (ex. The Iron Man is here).
-            This will be played in the leadup to the midnight to make her guess who arrived. </div>
+      </div>
 
-        <div id="section2" style="display: none;">
-            <div id="player"></div>
-            <!-- <iframe width="420" height="315" src="https://www.youtube.com/embed/mnj8vhLZtTk" frameborder="0"></iframe> -->
-            Sing the birthday song. The chorus will be played at the midnight on April 15th. (Be creative. You can just beatbox if you like.) </div>
+      <div id="body">
 
-        <div id="section3" style="display: none;">
-            This is the trivia quiz, and will be gifted to her. Answers paper will be out at the stroke of the midnight hour Boston time. </div>
+      <ol class="section-links" onclick="chooseSection(event)">
+          <li id="item1"> 1. Say Your Best Hi! </li>
+          <li id="item2"> 2. Sing (?) the Birthday Song! </li>
+          <li id="item3"> 3. Take the rapid fire Kapoor quiz! </li>
+      </ol>
+
+      <div class="section-contents">
+
+          <div id="section0">
+
+              Click on one of three tasks to get started.
+
+          </div>
+
+          <div id="section1" style="display: none;">
+              Announce your arrival to the party, without telling your name. (ex. Your Zumba mate is here). This will be played in the leadup to the midnight to make her guess who is this. Click 'record' to start. Ready? </div>
+
+          <div id="section2" style="display: none;">
+              Sing the birthday song. The chorus will be played at the midnight on April 15th. Be creative. You can just beatbox if you like. Click 'record' to start, the video will play automatically. Ready with headphones?
+              <div id="player1"></div></div>
+
+          <div id="section3" style="display: none;">
+              This is the trivia quiz, and will be gifted to her. Answers paper will be out at the stroke of the midnight hour Boston time.
+              <div id="player2"></div></div>
+      </div>
+
+      <div id="buttons" class="buttons" style="display: none;">
+
+          <button id="record-button" onclick="startRecording(this);">record</button>
+          <button id="stop-button" onclick="stopRecording(this);" disabled>stop</button>
+          <button id="save-button" onclick="saveRecording(this);" disabled>save</button>
+
+          <div id="recording-svg" class='uil-ripple-css' style='transform:scale(0.6);'><div></div><div></div></div>
+
+      </div>
+
+      <div id="recordings">
+
+          <h3> All your recordings, so far: </h3>
+
+          <div id="recordingslist"></div>
+          <div id="saved-list"></div>
+
+      </div>
+
+      <div id="fb-root"></div>
+
     </div>
 
-    <div class="buttons">
-
-        <button id="record-button" onclick="startRecording(this);">record</button>
-        <button id="stop-button" onclick="stopRecording(this);" disabled>stop</button>
-        <button id="save-button" onclick="saveRecording(this);" disabled>save</button>
+    <div id="countdown"> That's how much time before she does not have to pay under age fee: <br/> <span id="countdown-numbers"> - day - hrs - mins - secs </span> </div>
 
     </div>
 
-    <h4> All Your Messages, so far. </h4>
-
-    <div id="recordingslist"></div>
-    <div id="saved-list"></div>
-
-    <div id="fb-root"></div>
-
-    <script src="../dist/youtube.js"></script>
-    <script src="../dist/all.js"></script>
-    <script src="../dist/countdown.js"></script>
-    <script src="../dist/recorder.js"></script>
+    <script src="assets/youtube.js"></script>
+    <script src="assets/all.js"></script>
+    <script src="assets/countdown.js"></script>
+    <script src="assets/recorder.js"></script>
 
 </body>
 
