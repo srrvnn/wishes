@@ -83,9 +83,9 @@ function listObjs() {
                 });
             });
 
-            saveList.appendChild(entries[0]);
-            saveList.appendChild(entries[1]);
-            saveList.appendChild(entries[2]);
+            savedList.appendChild(entries[0]);
+            savedList.appendChild(entries[1]);
+            savedList.appendChild(entries[2]);
 
         }
     });
