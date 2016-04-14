@@ -86,7 +86,7 @@ function listObjs() {
                       //     playThree(au.id);
                       // };
 
-                      li.appendChild(button);
+                      // li.appendChild(button);
                     }
 
                     elTask[task].appendChild(li);
