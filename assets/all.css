@@ -206,7 +206,7 @@ html, body {
   margin-bottom: 100px;
 }
 
-#saved-list span:first-child {
+#saved-list > span:first-child {
   display: inline-block;
   height: 42px;
   vertical-align: top;
