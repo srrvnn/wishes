@@ -48,6 +48,10 @@ function chooseSection(e) {
   elStopButton.disabled = true;
   elRecordButton.disabled = false;
 
+  elVideos.style.display = 'none';
+  if (player1ready) player1.stopVideo();
+  if (player2ready) player2.stopVideo();
+
   elHeader.className = 'shorten';
   elIntro.style.display = 'none';
 
