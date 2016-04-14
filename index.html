@@ -7,6 +7,7 @@
     <link href="assets/all.css" rel="stylesheet">
     <link href="assets/ripple.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Schoolbell|Amatic+SC:700|Over+the+Rainbow' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -15,64 +16,96 @@
 
       <div id="header">
 
-        <h1> It's Kapoor's birthday!! This friday, April 15th! </h1>
+        <h1> It's Kapoor's birthday!! Tonight, April 15th! </h1>
 
-        <h2> Send your wishes, and love by recording a message! She is going to love it! </h2>
+        <h2> Send your wishes, and love by <b> recording a message, in: </b> </h2>
+
+        <div id="countdown"> <span id="countdown-numbers"> - day - hrs - mins - secs </span> </div>
 
       </div>
 
       <div id="body">
 
-      <ol class="section-links" onclick="chooseSection(event)">
-          <li id="item1"> 1. Say Your Best Hi! </li>
-          <li id="item2"> 2. Sing (?) the Birthday Song! </li>
-          <li id="item3"> 3. Take the rapid fire Kapoor quiz! </li>
-      </ol>
+        <div id="chrome" style="display: none">
 
-      <div class="section-contents">
+            Please use the latest version of Chrome browser?
 
-          <div id="section0">
+        </div>
 
-              Click on one of three tasks to get started.
+        <div id="intro">
 
-          </div>
+            Click on one of three tasks to get started.
 
-          <div id="section1" style="display: none;">
-              Announce your arrival to the party, without telling your name. (ex. Your Zumba mate is here). This will be played in the leadup to the midnight to make her guess who is this. Click 'record' to start. Ready? </div>
+        </div>
 
-          <div id="section2" style="display: none;">
-              Sing the birthday song. The chorus will be played at the midnight on April 15th. Be creative. You can just beatbox if you like. Click 'record' to start, the video will play automatically. Ready with headphones?
-              <div id="player1"></div></div>
+        <ol class="section-links" onclick="chooseSection(event)">
+            <li id="item1"> 1. Say Your Best Hi! </li>
+            <li id="item2"> 2. Sing (?) the Birthday Song! </li>
+            <li id="item3"> 3. Take the rapid fire Kapoor quiz! </li>
+        </ol>
 
-          <div id="section3" style="display: none;">
-              This is the trivia quiz, and will be gifted to her. Answers paper will be out at the stroke of the midnight hour Boston time.
-              <div id="player2"></div></div>
+        <div id="section-contents" class="section-contents">
+
+            <div id="section1" style="display: none;">
+
+                Announce your arrival to the party, without using your name or giving away your voice. She'll guess who this is.
+
+                <br/> <br/> 1. Ex: Your Zumba mate is here, or I am heeeerrrree in Batman's voice!
+                <br/> 2. You can try multiple times before saving your recording.
+                <br/> 3. Click 'Record' to start.
+
+                <br/> <br/> Are you ready? </div>
+
+            <div id="section2" style="display: none;">
+
+                Sing the birthday song. A chorus of all recordings will be played on a speaker when the clock strikes twelve.
+
+                <br/> <br/> 1. Be creative, and add any effect to the song. You can hum, add an opera voice, or dog bark.
+                <br/> 2. Use headphones please, to record just your voice, and not the song as well.
+                <br/> 3. Click 'Record' to start, a 66s karoake video will play automatically.
+
+                <br/> <br/> Are you ready? </div>
+
+            <div id="section3" style="display: none;">
+                This is the trivia quiz, the compilations of all the answers will be gifted to her.
+
+                <br/> <br/> 1. There are ten questions that will show up quickly in the video.
+                <br/> 2. I'm going to place my faith in you, like all our teacheres did to not cheat by retaking.
+                <br/> 3. Click 'Record' to start, a 30s video will play automatically.
+
+                <br/> <br/> Are you ready? </div>
+        </div>
+
+        <div id="buttons" class="buttons" style="display: none;">
+
+            <button id="record-button" onclick="startRecording(this);">Record</button>
+            <button id="stop-button" onclick="stopRecording(this);" disabled>Stop</button>
+            <button id="record-again-button" onclick="startRecording(this);" style="display: none">Start Again</button>
+            <button id="save-button" onclick="saveRecording(this);" style="display: none">Save</button>
+
+            <div id="recording-svg" class='uil-ripple-css' style='transform:scale(0.6);'><div></div><div></div></div>
+
+        </div>
+
+        <div id="videos" style="display: none;">
+
+           <div id="player1"></div>
+           <div id="player2"></div>
+
+        </div>
+
+        <div id="recordings" style="display: none">
+
+            <div id="recordingslist"></div>
+            <div id="saved-list"></div>
+
+        </div>
+
+        <div id="fb-root"></div>
+
       </div>
 
-      <div id="buttons" class="buttons" style="display: none;">
 
-          <button id="record-button" onclick="startRecording(this);">record</button>
-          <button id="stop-button" onclick="stopRecording(this);" disabled>stop</button>
-          <button id="save-button" onclick="saveRecording(this);" disabled>save</button>
-
-          <div id="recording-svg" class='uil-ripple-css' style='transform:scale(0.6);'><div></div><div></div></div>
-
-      </div>
-
-      <div id="recordings">
-
-          <h3> All your recordings, so far: </h3>
-
-          <div id="recordingslist"></div>
-          <div id="saved-list"></div>
-
-      </div>
-
-      <div id="fb-root"></div>
-
-    </div>
-
-    <div id="countdown"> That's how much time before she does not have to pay under age fee: <br/> <span id="countdown-numbers"> - day - hrs - mins - secs </span> </div>
 
     </div>
 

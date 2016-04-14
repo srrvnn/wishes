@@ -1,6 +1,6 @@
 AWS.config.region = 'us-west-2';
 
-var appId = '1172856152725672';
+var appId = ~window.location.host.indexOf('localhost') ? '1173370219340932' : '1172856152725672';
 var roleArn = 'arn:aws:iam::694260833504:role/srrvnn-records-facebook';
 var bucketName = 'srrvnn-records';
 var fbUserId;
@@ -11,14 +11,19 @@ var bucket = new AWS.S3({
     }
 });
 
-var buttons = document.getElementById('buttons');
+var elHeader = document.getElementById('header');
+var elIntro = document.querySelector('#intro');
+
+var elButtons = document.getElementById('buttons');
 var recordings = document.getElementById('recordings');
 
-var recordButton = document.getElementById('record-button');
-var stopButton = document.getElementById('stop-button');
-var saveButton = document.getElementById('save-button');
+var elRecord = document.getElementById('record-button');
+var elStop = document.getElementById('stop-button');
+var elRecordAgain = document.getElementById('record-again-button');
+var elSave = document.getElementById('save-button');
 
-var intro = document.querySelector('#section0');
+var elSection = document.getElementById('section-contents');
+var elVideos = document.getElementById('videos');
 
 var recordingSvg = document.getElementById('recording-svg');
 
@@ -31,50 +36,59 @@ var section = 1;
 
 function chooseSection(e) {
 
-  buttons.style.display = 'block';
-  intro.style.display = 'none';
+  if (e.target.tagName !== 'LI') return;
+
+  elHeader.className = 'shorten';
+  elIntro.style.display = 'none';
+
+  elButtons.style.display = 'block';
+  elSection.style.height = '500px';
+
+  elRecord.style.display = 'inline-block';
+  elStop.style.display = 'inline-block';
+
+  elSave.style.display = 'none';
+  recordingslist.innerHTML = '';
+
+  document.querySelector('#item1').className = '';
+  document.querySelector('#item2').className = '';
+  document.querySelector('#item3').className = '';
+  document.querySelector('#item' + e.target.id.slice(-1)).className = "selected";
 
   document.querySelector('#section1').style.display = 'none';
   document.querySelector('#section2').style.display = 'none';
   document.querySelector('#section3').style.display = 'none';
-
-  document.querySelector('#item1').className = '';
-  document.querySelector('#item2').className = '';
-  document.querySelector('#item2').className = '';
-
   document.querySelector('#section' + e.target.id.slice(-1)).style.display = 'block';
-  document.querySelector('#item' + e.target.id.slice(-1)).className = "selected";
 
   section = e.target.id.slice(-1);
 }
 
-function startUserMedia(stream) {
-
-    var input = audio_context.createMediaStreamSource(stream);
-    __log('Media stream created.');
-
-    // Uncomment if you want the audio to feedback directly
-    //input.connect(audio_context.destination);
-    //__log('Input connected to audio context destination.');
-
-    recorder = new Recorder(input);
-    __log('Recorder initialised.');
-}
-
 function startRecording(button) {
 
+    elSection.style.height = '500px';
+    elSection.style.height = '0px';
+
     recordingSvg.style.display = 'block';
+    elStop.disabled = false;
+    elRecord.disabled = true;
 
     recorder && recorder.record();
-    stopButton.disabled = false;
-    recordButton.disabled = true;
-    saveButton.disabled = true;
 
     recordingslist.innerHTML = '';
 
     if (section == 2) {
 
-      player1.playVideo();
+        elVideos.style.display = 'block';
+
+        player1.stopVideo();
+        player1.playVideo();
+
+    } else if (section == 3) {
+
+        elVideos.style.display = 'block';
+
+        player2.stopVideo();
+        player2.playVideo();
     }
 
     __log('Recording...');
@@ -82,13 +96,20 @@ function startRecording(button) {
 
 function stopRecording(button) {
 
-    recordings.style.display = 'block';
+    if (player1ready) player1.stopVideo();
+    if (player2ready) player2.stopVideo();
+
     recordingSvg.style.display = 'none';
+    recordings.style.display = 'block';
+
+    elRecord.style.display = 'none';
+    elVideos.style.display = 'none';
+    elStop.style.display = 'none';
+    elRecordAgain.style.display = 'inline-block'
+    elSave.style.display = 'inline-block';
 
     recorder && recorder.stop();
-    stopButton.disabled = true;
-    recordButton.disabled = false;
-    saveButton.disabled = false;
+
     __log('Stopped recording.');
 
     recorder && recorder.exportWAV(function(blob) {
@@ -142,7 +163,7 @@ function __log(e, data) {
 
 function listObjs() {
 
-    savedList.innerHTML = 'Nothing saved, yet.';
+    savedList.innerHTML = '';
 
     var prefix = 'facebook-' + fbUserId;
 
@@ -171,8 +192,8 @@ function listObjs() {
 
                 }, function(err, data) {
 
-                    if (savedList.innerHTML == 'Nothing saved, yet.') {
-                        savedList.innerHTML == '';
+                    if (savedList.innerHTML == '') {
+                        savedList.innerHTML == 'Your saved recordings so far.';
                     }
 
                     if (err || data === null) return;
@@ -205,6 +226,19 @@ function listObjs() {
             });
         }
     });
+}
+
+function startUserMedia(stream) {
+
+    var input = audio_context.createMediaStreamSource(stream);
+    __log('Media stream created.');
+
+    // Uncomment if you want the audio to feedback directly
+    //input.connect(audio_context.destination);
+    //__log('Input connected to audio context destination.');
+
+    recorder = new Recorder(input);
+    __log('Recorder initialised.');
 }
 
 window.onload = function init() {
@@ -244,6 +278,7 @@ window.fbAsyncInit = function() {
             RoleArn: roleArn,
             WebIdentityToken: response.authResponse.accessToken
         });
+        console.log('use name to store the recording');
         fbUserId = response.authResponse.userID;
         listObjs();
     });

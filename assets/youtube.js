@@ -1,6 +1,9 @@
 var player1;
 var tag = document.createElement('script');
 
+var player1ready = false;
+var player2ready = false;
+
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -13,6 +16,9 @@ function onYouTubeIframeAPIReady() {
     height: '390',
     width: '640',
     videoId: 'mnj8vhLZtTk',
+    playerVars: {
+      controls: 0
+    },
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
@@ -22,6 +28,7 @@ function onYouTubeIframeAPIReady() {
   // 4. The API will call this function when the video player is ready.
         function onPlayerReady(event) {
           console.log('player ready');
+          window.player1ready = true;
         }
 }
 var done = false;
