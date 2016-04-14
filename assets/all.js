@@ -282,19 +282,21 @@ function statusChange(response) {
       document.getElementById('fb-login').style.display = 'none';
       document.getElementById('body').style.display = 'block';
 
+      var token = response.authResponse.accessToken;
+      fbUserId = response.authResponse.userID;
+
       FB.api('/me', function(response) {
         fbUserName = response.name.replace(' ', '-').toLowerCase();
         document.querySelector('#header h2').innerHTML = 'Hello ' + response.name.split(' ')[0] + ', send your wishes, and love by recording a message, in: '
-      });
 
-      bucket.config.credentials = new AWS.WebIdentityCredentials({
-          ProviderId: 'graph.facebook.com',
-          RoleArn: roleArn,
-          WebIdentityToken: response.authResponse.accessToken
+        bucket.config.credentials = new AWS.WebIdentityCredentials({
+            ProviderId: 'graph.facebook.com',
+            RoleArn: roleArn,
+            WebIdentityToken: token
+        });
+
+        listObjs();
       });
-      console.log('use name to store the recording');
-      fbUserId = response.authResponse.userID;
-      listObjs();
   }
 }
 
