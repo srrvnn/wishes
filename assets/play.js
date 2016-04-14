@@ -79,6 +79,8 @@ function listObjs() {
 
                     var task = Number(obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/')));
 
+                    console.log(task - 1);
+
                     entries[task - 1].appendChild(li);
                 });
             });
