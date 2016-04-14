@@ -22,11 +22,10 @@ function __log(e, data) {
     // log.innerHTML += "\n" + e + " " + (data || '');
 }
 
-var everything = [];
-
 function listObjs() {
 
     var prefix = '';
+    var everything = [];
 
     bucket.listObjects({
 
@@ -40,25 +39,13 @@ function listObjs() {
 
         } else {
 
-            function makeAudio(entry) {
-
-              var blob = new Blob([entry.data]);
-              blob.type = "audio/wav";
-
-              var url = URL.createObjectURL(blob);
-
-              var au = document.createElement('audio');
-              au.id = entry.key;
-              au.controls = true;
-              au.src = url;
-
-              var li = document.createElement('div');
-              li.appendChild(au);
-
-              savedList.appendChild(li);
-            }
-
             var objKeys = "";
+
+            var entries = [
+              document.createElement('div'),
+              document.createElement('div'),
+              document.createElement('div')
+            ];
 
             data.Contents.forEach(function(obj) {
 
@@ -73,80 +60,33 @@ function listObjs() {
 
                     if (err || data === null) return;
 
-                    everything.push({
+                    var blob = new Blob([data.Body.buffer]);
+                    blob.type = "audio/wav";
+                    var url = URL.createObjectURL(blob);
 
-                        key: obj.Key,
-                        data: data.Body.buffer
-                    });
+                    var li = document.createElement('div');
 
-                    // var blob = new Blob([data.Body.buffer]);
-                    // blob.type = "audio/wav";
-                    // var url = URL.createObjectURL(blob);
+                    var sp = document.createElement('span');
+                    sp.innerHTML = obj.Key;
 
-                    // var li = document.createElement('div');
+                    var au = document.createElement('audio');
+                    au.id = obj.Key;
+                    au.controls = true;
+                    au.src = url;
 
-                    // var sp = document.createElement('span');
-                    // // sp.innerHTML = obj.Key;
-                    // // sp.innerHTML = 'Task ' + obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + '&mdash;';
+                    li.appendChild(sp);
+                    li.appendChild(au);
 
-                    // var au = document.createElement('audio');
-                    // au.id = obj.Key;
-                    // au.controls = true;
-                    // au.src = url;
+                    var task = Number(obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/'));
 
-                    // li.appendChild(sp);
-                    // li.appendChild(au);
-
-                    // savedList.appendChild(li);
+                    entries[task - 1].appendChild(li);
                 });
             });
 
-            console.log('everything', everything.length);
+            saveList.appendChild(entries[0]);
+            saveList.appendChild(entries[1]);
+            saveList.appendChild(entries[2]);
 
-            // find all the ones
-
-            var task_one_entries = everything.filter(function(item) {
-
-              var tasknumber = item.key.slice(item.key.lastIndexOf('/') + 1, item.key.lastIndexOf('/') + 2);
-              return tasknumber == 1 || tasknumber == '1';
-            });
-
-            console.log('one', task_two_entries.length);
-
-            var task_two_entries = everything.filter(function(item) {
-
-              var tasknumber = item.key.slice(item.key.lastIndexOf('/') + 1, item.key.lastIndexOf('/') + 2);
-              return tasknumber == 2 || tasknumber == '2';
-            });
-
-            console.log('two', task_two_entries.length);
-
-            var task_three_entries = everything.filter(function(item) {
-
-              var tasknumber = item.key.slice(item.key.lastIndexOf('/') + 1, item.key.lastIndexOf('/') + 2);
-              return tasknumber == 3 || tasknumber == '3';
-            });
-
-            console.log('three', task_three_entries.length);
-
-
-            var h1 = document.createElement('h2');
-            h1.innerHTML = 'Task One Responses';
-            savedList.appendChild(h1);
-
-            task_one_entries.forEach(makeAudio);
-
-            var h2 = document.createElement('h2');
-            h2.innerHTML = 'Task Two Responses';
-            savedList.appendChild(h1);
-
-            task_two_entries.forEach(makeAudio);
-
-            var h3 = document.createElement('h2');
-            h3.innerHTML = 'Task Three Responses';
-            savedList.appendChild(h1);
-
-            task_three_entries.forEach(makeAudio);
         }
     });
 }
