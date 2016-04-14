@@ -104,6 +104,7 @@ function startRecording(button) {
 
         elVideos.style.display = 'block';
 
+        document.getElementById('player2').style.display = 'none';
         document.getElementById('player1').style.display = 'block';
 
         player1.stopVideo();
@@ -113,6 +114,7 @@ function startRecording(button) {
 
         elVideos.style.display = 'block';
 
+        document.getElementById('player1').style.display = 'none';
         document.getElementById('player2').style.display = 'block';
 
         player2.stopVideo();
