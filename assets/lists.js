@@ -25,6 +25,7 @@ function __log(e, data) {
 function listObjs() {
 
     var prefix = '';
+    var everything = [];
 
     bucket.listObjects({
 
@@ -53,6 +54,11 @@ function listObjs() {
 
                     if (err || data === null) return;
 
+                    everything.push({
+                        key: obj.Key,
+                        data: data.Body.buffer
+                    });
+
                     console.log(obj.Key);
 
                     // var blob = new Blob([data.Body.buffer]);
@@ -65,12 +71,16 @@ function listObjs() {
                     sp.innerHTML = obj.Key;
                     // sp.innerHTML = 'Task ' + obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + '&mdash;';
 
+                    var sp2 = document.createElement('span');
+                    sp2.innerHTML = data.Body.buffer.toString().length;
+
                     // var au = document.createElement('audio');
                     // au.id = obj.Key;
                     // au.controls = true;
                     // au.src = url;
 
                     li.appendChild(sp);
+                    li.appendChild(sp2);
                     // li.appendChild(au);
 
                     // // var play = document.createElement('button');

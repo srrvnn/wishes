@@ -25,6 +25,7 @@ function __log(e, data) {
 function listObjs() {
 
     var prefix = '';
+    var everything = [];
 
     bucket.listObjects({
 
@@ -37,6 +38,24 @@ function listObjs() {
             console.log('ERROR: ' + err);
 
         } else {
+
+            function makeAudio(entry) {
+
+              var blob = new Blob([entry.data]);
+              blob.type = "audio/wav";
+
+              var url = URL.createObjectURL(blob);
+
+              var au = document.createElement('audio');
+              au.id = entry.key;
+              au.controls = true;
+              au.src = url;
+
+              var li = document.createElement('div');
+              li.appendChild(au);
+
+              savedList.appendChild(li);
+            }
 
             var objKeys = "";
 
@@ -53,27 +72,72 @@ function listObjs() {
 
                     if (err || data === null) return;
 
-                    var blob = new Blob([data.Body.buffer]);
-                    blob.type = "audio/wav";
-                    var url = URL.createObjectURL(blob);
+                    everything.push({
 
-                    var li = document.createElement('div');
+                        key: obj.Key,
+                        data: data.Body.buffer
+                    });
 
-                    var sp = document.createElement('span');
-                    // sp.innerHTML = obj.Key;
-                    // sp.innerHTML = 'Task ' + obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + '&mdash;';
+                    // var blob = new Blob([data.Body.buffer]);
+                    // blob.type = "audio/wav";
+                    // var url = URL.createObjectURL(blob);
 
-                    var au = document.createElement('audio');
-                    au.id = obj.Key;
-                    au.controls = true;
-                    au.src = url;
+                    // var li = document.createElement('div');
 
-                    li.appendChild(sp);
-                    li.appendChild(au);
+                    // var sp = document.createElement('span');
+                    // // sp.innerHTML = obj.Key;
+                    // // sp.innerHTML = 'Task ' + obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + '&mdash;';
 
-                    savedList.appendChild(li);
+                    // var au = document.createElement('audio');
+                    // au.id = obj.Key;
+                    // au.controls = true;
+                    // au.src = url;
+
+                    // li.appendChild(sp);
+                    // li.appendChild(au);
+
+                    // savedList.appendChild(li);
                 });
             });
+
+            // find all the ones
+
+            var task_one_entries = everything.filter(function(item) {
+
+              var tasknumber = item.key.slice(item.key.lastIndexOf('/') + 1, item.key.lastIndexOf('/') + 2);
+              return tasknumber == 1 || tasknumber == '1';
+            });
+
+            var task_two_entries = everything.filter(function(item) {
+
+              var tasknumber = item.key.slice(item.key.lastIndexOf('/') + 1, item.key.lastIndexOf('/') + 2);
+              return tasknumber == 2 || tasknumber == '2';
+            });
+
+            var task_three_entries = everything.filter(function(item) {
+
+              var tasknumber = item.key.slice(item.key.lastIndexOf('/') + 1, item.key.lastIndexOf('/') + 2);
+              return tasknumber == 3 || tasknumber == '3';
+            });
+
+
+            var h1 = document.createElement('h2');
+            h1.innerHTML = 'Task One Responses';
+            savedList.appendChild(h1);
+
+            task_one_entries.forEach(makeAudio);
+
+            var h2 = document.createElement('h2');
+            h2.innerHTML = 'Task Two Responses';
+            savedList.appendChild(h1);
+
+            var h3 = document.createElement('h2');
+            h3.innerHTML = 'Task Three Responses';
+            savedList.appendChild(h1);
+
+            savedList.innerHTML += 'Task Three Responses';
+
+            task_one_entries.forEach(makeAudio);
         }
     });
 }
