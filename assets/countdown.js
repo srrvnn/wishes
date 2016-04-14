@@ -22,8 +22,8 @@ function showRemaining() {
     var seconds = Math.floor((distance % _minute) / _second);
 
     // document.getElementById('countdown-numbers').innerHTML = days + ' day &mdash; ';
-    document.getElementById('countdown-numbers').innerHTML = hours + (hours > 1 ? ' hours &mdash;  ' : 'hour &mdash');
-    document.getElementById('countdown-numbers').innerHTML += minutes + (minutes > 1 ? ' mins &mdash;  ' : 'min &mdash');
+    document.getElementById('countdown-numbers').innerHTML = hours + (hours > 1 ? ' hours &mdash;  ' : 'hour &mdash;');
+    document.getElementById('countdown-numbers').innerHTML += minutes + (minutes > 1 ? ' mins &mdash;  ' : 'min &mdash;');
     document.getElementById('countdown-numbers').innerHTML += seconds + (seconds > 1 ? ' seconds' : 'second');
 }
 

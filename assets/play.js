@@ -66,29 +66,36 @@ function listObjs() {
 
                     var li = document.createElement('div');
 
-                    var sp = document.createElement('span');
-                    sp.innerHTML = obj.Key;
-
                     var au = document.createElement('audio');
                     au.id = obj.Key;
                     au.controls = true;
                     au.src = url;
 
-                    li.appendChild(sp);
                     li.appendChild(au);
 
                     var task = Number(obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2));
-
-                    console.log(task - 1);
 
                     entries[task - 1].appendChild(li);
                 });
             });
 
-            savedList.appendChild(entries[0]);
-            savedList.appendChild(entries[1]);
-            savedList.appendChild(entries[2]);
+            var elHead1 = document.createElement('h2');
+            elHead1.innerHTML = 'Task One Entries';
 
+            savedList.appendChild(elHead1);
+            savedList.appendChild(entries[0]);
+
+            var elHead2 = document.createElement('h2');
+            elHead2.innerHTML = 'Task Two Entries';
+
+            savedList.appendChild(elHead2);
+            savedList.appendChild(entries[1]);
+
+            var elHead3 = document.createElement('h2');
+            elHead3.innerHTML = 'Task Three Entries';
+
+            savedList.appendChild(elHead3);
+            savedList.appendChild(entries[2]);
         }
     });
 }
