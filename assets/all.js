@@ -200,7 +200,7 @@ function listObjs() {
                 }, function(err, data) {
 
                     if (savedList.innerHTML == '') {
-                        savedList.innerHTML == 'Your saved recordings so far.';
+                        savedList.innerHTML = 'Your saved recordings so far:';
                     }
 
                     if (err || data === null) return;
@@ -213,7 +213,7 @@ function listObjs() {
 
                     var sp = document.createElement('span');
                     // sp.innerHTML = obj.Key;
-                    sp.innerHTML = obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + '.';
+                    sp.innerHTML = 'Task ' + obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + ':';
 
                     var au = document.createElement('audio');
                     au.id = obj.Key;
