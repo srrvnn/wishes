@@ -73,6 +73,7 @@ function listObjs() {
                     au.src = url;
 
                     li.appendChild(au);
+                    var task = Number(obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2));
 
                     elTask[task].appendChild(li);
                 });
