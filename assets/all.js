@@ -172,6 +172,8 @@ function listObjs() {
 
     savedList.innerHTML = '';
 
+    console.log(fbUserName);
+
     var prefix = 'facebook-' + fbUserName;
 
     bucket.listObjects({
