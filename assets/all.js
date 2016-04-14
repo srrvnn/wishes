@@ -135,7 +135,7 @@ function saveRecording(button) {
 
     recordingslist.innerHTML = '';
 
-    var objKey = 'fb-' + fbUserName + '/records/' + section + '-' + Date.now();
+    var objKey = 'facebook-' + fbUserId + '/records/' + section + '-' + Date.now();
 
     var params = {
 
@@ -172,9 +172,7 @@ function listObjs() {
 
     savedList.innerHTML = '';
 
-    console.log(fbUserName);
-
-    var prefix = 'facebook-' + fbUserName;
+    var prefix = 'facebook-' + fbUserId;
 
     bucket.listObjects({
 
