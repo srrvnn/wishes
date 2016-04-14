@@ -4,6 +4,7 @@ var appId = ~window.location.host.indexOf('localhost') ? '1173370219340932' : '1
 var roleArn = 'arn:aws:iam::694260833504:role/srrvnn-records-facebook';
 var bucketName = 'srrvnn-records';
 var fbUserId;
+var fbUserName;
 
 var bucket = new AWS.S3({
     params: {
@@ -69,6 +70,12 @@ function startRecording(button) {
     elSection.style.height = '0px';
 
     recordingSvg.style.display = 'block';
+
+    elRecord.style.display = 'inline-block';
+    elStop.style.display = 'inline-block';
+    elRecordAgain.style.display = 'none';
+    elSave.style.display = 'none';
+
     elStop.disabled = false;
     elRecord.disabled = true;
 
@@ -128,7 +135,7 @@ function saveRecording(button) {
 
     recordingslist.innerHTML = '';
 
-    var objKey = 'facebook-' + fbUserId + '/records/' + section + '-' + Date.now();
+    var objKey = 'fb-' + fbUserName + '/records/' + section + '-' + Date.now();
 
     var params = {
 
@@ -165,7 +172,7 @@ function listObjs() {
 
     savedList.innerHTML = '';
 
-    var prefix = 'facebook-' + fbUserId;
+    var prefix = 'facebook-' + fbUserName;
 
     bucket.listObjects({
 
@@ -268,31 +275,42 @@ window.onload = function init() {
     });
 };
 
+function statusChange(response) {
+
+  if (response.status === 'connected') {
+
+      document.getElementById('fb-login').style.display = 'none';
+      document.getElementById('body').style.display = 'block';
+
+      FB.api('/me', function(response) {
+        fbUserName = response.name.replace(' ', '-').toLowerCase();
+        document.querySelector('#header h2').innerHTML = 'Hello ' + response.name.split(' ')[0] + ', send your wishes, and love by recording a message, in: '
+      });
+
+      bucket.config.credentials = new AWS.WebIdentityCredentials({
+          ProviderId: 'graph.facebook.com',
+          RoleArn: roleArn,
+          WebIdentityToken: response.authResponse.accessToken
+      });
+      console.log('use name to store the recording');
+      fbUserId = response.authResponse.userID;
+      listObjs();
+  }
+}
+
 window.fbAsyncInit = function() {
     FB.init({
         appId: appId
     });
-    FB.login(function(response) {
-        bucket.config.credentials = new AWS.WebIdentityCredentials({
-            ProviderId: 'graph.facebook.com',
-            RoleArn: roleArn,
-            WebIdentityToken: response.authResponse.accessToken
-        });
-        console.log('use name to store the recording');
-        fbUserId = response.authResponse.userID;
-        listObjs();
-    });
+    FB.Event.subscribe('auth.statusChange', statusChange);
 };
 
 // Load the Facebook SDK asynchronously
 
 (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {
-        return;
-    }
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js";
-    fjs.parentNode.insertBefore(js, fjs);
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
