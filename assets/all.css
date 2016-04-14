@@ -160,7 +160,8 @@ html, body {
   line-height: 55px;
 }
 
-#player1 {
+#player1,
+#player2 {
 
   display: block;
   margin: 10px auto;

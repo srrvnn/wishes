@@ -50,7 +50,9 @@ function chooseSection(e) {
   elRecord.style.display = 'inline-block';
   elStop.style.display = 'inline-block';
 
+  elRecordAgain.style.display = 'none';
   elSave.style.display = 'none';
+
   recordingslist.innerHTML = '';
 
   document.querySelector('#item1').className = '';
@@ -89,12 +91,16 @@ function startRecording(button) {
 
         elVideos.style.display = 'block';
 
+        document.getElementById('player1').style.display = 'block';
+
         player1.stopVideo();
         player1.playVideo();
 
     } else if (section == 3) {
 
         elVideos.style.display = 'block';
+
+        document.getElementById('player2').style.display = 'block';
 
         player2.stopVideo();
         player2.playVideo();
@@ -113,6 +119,10 @@ function stopRecording(button) {
 
     elRecord.style.display = 'none';
     elVideos.style.display = 'none';
+
+    document.getElementById('player1').style.display = 'none';
+    document.getElementById('player2').style.display = 'none';
+
     elStop.style.display = 'none';
     elRecordAgain.style.display = 'inline-block'
     elSave.style.display = 'inline-block';
