@@ -200,7 +200,9 @@ function listObjs() {
                 }, function(err, data) {
 
                     if (savedList.innerHTML == '') {
-                        savedList.innerHTML = 'Your saved recordings so far:';
+                        var sp = document.createElement('span');
+                        sp.innerHTML = 'Your saved recordings:'
+                        savedList.appendChild(sp);
                     }
 
                     if (err || data === null) return;
