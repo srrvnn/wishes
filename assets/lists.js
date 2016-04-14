@@ -25,7 +25,6 @@ function __log(e, data) {
 function listObjs() {
 
     var prefix = '';
-    var everything = [];
 
     bucket.listObjects({
 
@@ -45,51 +44,15 @@ function listObjs() {
 
                 objKeys += obj.Key + "<br>";
 
-                bucket.getObject({
 
-                    Bucket: 'srrvnn-records',
-                    Key: obj.Key
+                var li = document.createElement('div');
 
-                }, function(err, data) {
+                var sp = document.createElement('span');
+                sp.innerHTML = obj.Key;
 
-                    if (err || data === null) return;
+                li.appendChild(sp);
 
-                    everything.push({
-                        key: obj.Key,
-                        data: data.Body.buffer
-                    });
-
-                    console.log(obj.Key);
-
-                    // var blob = new Blob([data.Body.buffer]);
-                    // blob.type = "audio/wav";
-                    // var url = URL.createObjectURL(blob);
-
-                    var li = document.createElement('div');
-
-                    var sp = document.createElement('span');
-                    sp.innerHTML = obj.Key;
-                    // sp.innerHTML = 'Task ' + obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + '&mdash;';
-
-                    var sp2 = document.createElement('span');
-                    sp2.innerHTML = data.Body.buffer.toString().length;
-
-                    // var au = document.createElement('audio');
-                    // au.id = obj.Key;
-                    // au.controls = true;
-                    // au.src = url;
-
-                    li.appendChild(sp);
-                    li.appendChild(sp2);
-                    // li.appendChild(au);
-
-                    // // var play = document.createElement('button');
-                    // // play.innerHTML = 'Play';
-                    // // play.setAttribute('onclick', "document.getElementById(\'" + au.id + "\').play()");
-                    // // li.appendChild(play);
-
-                    savedList.appendChild(li);
-                });
+                savedList.appendChild(li);
             });
         }
     });
