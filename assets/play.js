@@ -72,17 +72,19 @@ function listObjs() {
                     au.controls = true;
                     au.src = url;
 
+                    au.addEventListener("playing", function() { player2.stopVideo(); player2.playVideo(); }, true);
+
                     li.appendChild(au);
                     var task = Number(obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2));
 
                     if (task == 3) {
 
-                      var button = document.createElement('button');
-                      button.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
+                      // var button = document.createElement('button');
+                      // button.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
 
-                      button.onclick = function() {
-                          playThree(au.id);
-                      };
+                      // button.onclick = function() {
+                      //     playThree(au.id);
+                      // };
 
                       li.appendChild(button);
                     }
