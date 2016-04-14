@@ -72,7 +72,7 @@ function listObjs() {
                     au.controls = true;
                     au.src = url;
 
-                    au.addEventListener("playing", function() { player2.playVideo(); player2.seekTo(4); }, true);
+                    au.addEventListener("playing", function() { player2.playVideo(); player2.seekTo(2); }, true);
 
                     li.appendChild(au);
                     var task = Number(obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2));
