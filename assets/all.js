@@ -42,6 +42,7 @@ function chooseSection(e) {
   if (e.target.tagName !== 'LI') return;
 
   recorder && recorder.stop();
+  recorder && recorder.clear();
 
   recordingSvg.style.display = 'none';
   elStopButton.disabled = true;
@@ -75,6 +76,8 @@ function chooseSection(e) {
 }
 
 function startRecording(button) {
+
+    recorder && recorder.clear();
 
     elSection.style.height = '500px';
     elSection.style.height = '0px';
