@@ -153,7 +153,7 @@ function saveRecording(button) {
 
     recordingslist.innerHTML = '';
 
-    var objKey = 'facebook-' + fbUserId + '/records/' + section + '-' + Date.now();
+    var objKey = 'facebook-' + fbUserId + '/records-'+ fbUserName +'/' + section + '-' + Date.now();
 
     var params = {
 
