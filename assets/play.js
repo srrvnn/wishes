@@ -51,41 +51,27 @@ function listObjs() {
 
                 }, function(err, data) {
 
-                    console.log(obj.Key);
-                    console.dir(data);
+                    if (err || data === null) return;
 
-                    // if (savedList.innerHTML == '') {
-                    //     var sp = document.createElement('span');
-                    //     sp.innerHTML = 'Your saved recordings:'
-                    //     savedList.appendChild(sp);
-                    // }
+                    var blob = new Blob([data.Body.buffer]);
+                    blob.type = "audio/wav";
+                    var url = URL.createObjectURL(blob);
 
-                    // if (err || data === null) return;
+                    var li = document.createElement('div');
 
-                    // var blob = new Blob([data.Body.buffer]);
-                    // blob.type = "audio/wav";
-                    // var url = URL.createObjectURL(blob);
-
-                    // var li = document.createElement('div');
-
-                    // var sp = document.createElement('span');
-                    // // sp.innerHTML = obj.Key;
+                    var sp = document.createElement('span');
+                    // sp.innerHTML = obj.Key;
                     // sp.innerHTML = 'Task ' + obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2) + '&mdash;';
 
-                    // var au = document.createElement('audio');
-                    // au.id = obj.Key;
-                    // au.controls = true;
-                    // au.src = url;
+                    var au = document.createElement('audio');
+                    au.id = obj.Key;
+                    au.controls = true;
+                    au.src = url;
 
-                    // li.appendChild(sp);
-                    // li.appendChild(au);
+                    li.appendChild(sp);
+                    li.appendChild(au);
 
-                    // // var play = document.createElement('button');
-                    // // play.innerHTML = 'Play';
-                    // // play.setAttribute('onclick', "document.getElementById(\'" + au.id + "\').play()");
-                    // // li.appendChild(play);
-
-                    // savedList.appendChild(li);
+                    savedList.appendChild(li);
                 });
             });
         }
