@@ -211,7 +211,10 @@ window.onload = function init() {
     try {
         // webkit shim
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
+        navigator.getUserMedia = ( navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
         window.URL = window.URL || window.webkitURL;
 
         audio_context = new AudioContext;
