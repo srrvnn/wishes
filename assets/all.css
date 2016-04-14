@@ -172,9 +172,32 @@ html, body {
 }
 
 .buttons button {
-  background: transparent;
+  background: #B6EDF0;
+  border: none;
+  color: black;
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+  font-size: 20px;
+  display: block;
+  margin: 5px 20px;
+  cursor: pointer;
+}
 
+.buttons button:disabled {
 
+  cursor: default;
+  color: #ececec;
+}
+
+.buttons button:disabled:hover {
+
+  background: #B6EDF0;
+}
+
+.buttons button:hover {
+
+  background: #38ACA6;
 }
 
 #recordingslist {

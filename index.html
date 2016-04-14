@@ -80,10 +80,17 @@
 
         <div id="buttons" class="buttons" style="display: none;">
 
-            <button id="record-button" onclick="startRecording(this);">Record</button>
-            <button id="stop-button" onclick="stopRecording(this);" disabled>Stop</button>
-            <button id="record-again-button" onclick="startRecording(this);" style="display: none">Start Again</button>
-            <button id="save-button" onclick="saveRecording(this);" style="display: none">Save</button>
+            <div id="record-button"> <button onclick="startRecording(this);">
+              <i class="fa fa-microphone" aria-hidden="true"></i></button> Record </div>
+
+            <div id="stop-button"> <button onclick="stopRecording(this);" disabled>
+              <i class="fa fa-stop" aria-hidden="true"></i></button> Stop </div>
+
+            <div id="record-again-button" style="display: none"> <button onclick="startRecording(this);">
+              <i class="fa fa-microphone" aria-hidden="true"></i></button> Start Over </div>
+
+            <div id="save-button" style="display: none"> <button onclick="saveRecording(this);">
+              <i class="fa fa-floppy-o" aria-hidden="true"></i></button> Save </div>
 
             <div id="recording-svg" class='uil-ripple-css' style='transform:scale(0.6);'><div></div><div></div></div>
 

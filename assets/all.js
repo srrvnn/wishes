@@ -19,7 +19,9 @@ var elButtons = document.getElementById('buttons');
 var recordings = document.getElementById('recordings');
 
 var elRecord = document.getElementById('record-button');
+var elRecordButton = document.querySelector('#record-button > button');
 var elStop = document.getElementById('stop-button');
+var elStopButton = document.querySelector('#stop-button > button');
 var elRecordAgain = document.getElementById('record-again-button');
 var elSave = document.getElementById('save-button');
 
@@ -76,8 +78,8 @@ function startRecording(button) {
     elRecordAgain.style.display = 'none';
     elSave.style.display = 'none';
 
-    elStop.disabled = false;
-    elRecord.disabled = true;
+    elStopButton.disabled = false;
+    elRecordButton.disabled = true;
 
     recorder && recorder.record();
 
