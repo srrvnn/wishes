@@ -12,7 +12,7 @@ function showRemaining() {
     if (distance < 0) {
 
         clearInterval(timer);
-        document.getElementById('countdown-numbers').innerHTML = 'EXPIRED!';
+        document.getElementById('countdown-numbers').innerHTML = 'It is the fifteenth of April!!!';
 
         return;
     }

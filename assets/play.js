@@ -6,6 +6,13 @@ var bucketName = 'srrvnn-records';
 var fbUserId;
 var fbUserName;
 
+var elTask = [
+  null,
+  document.getElementById('task-one'),
+  document.getElementById('task-two'),
+  document.getElementById('task-three')
+];
+
 var bucket = new AWS.S3({
     params: {
         Bucket: bucketName
@@ -41,12 +48,6 @@ function listObjs() {
 
             var objKeys = "";
 
-            var entries = [
-              document.createElement('div'),
-              document.createElement('div'),
-              document.createElement('div')
-            ];
-
             data.Contents.forEach(function(obj) {
 
                 objKeys += obj.Key + "<br>";
@@ -73,29 +74,9 @@ function listObjs() {
 
                     li.appendChild(au);
 
-                    var task = Number(obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2));
-
-                    entries[task - 1].appendChild(li);
+                    elTask[task].appendChild(li);
                 });
             });
-
-            var elHead1 = document.createElement('h2');
-            elHead1.innerHTML = 'Task One Entries';
-
-            savedList.appendChild(elHead1);
-            savedList.appendChild(entries[0]);
-
-            var elHead2 = document.createElement('h2');
-            elHead2.innerHTML = 'Task Two Entries';
-
-            savedList.appendChild(elHead2);
-            savedList.appendChild(entries[1]);
-
-            var elHead3 = document.createElement('h2');
-            elHead3.innerHTML = 'Task Three Entries';
-
-            savedList.appendChild(elHead3);
-            savedList.appendChild(entries[2]);
         }
     });
 }
