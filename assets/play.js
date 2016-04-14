@@ -77,7 +77,7 @@ function listObjs() {
                     li.appendChild(sp);
                     li.appendChild(au);
 
-                    var task = Number(obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/')));
+                    var task = Number(obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2));
 
                     console.log(task - 1);
 
