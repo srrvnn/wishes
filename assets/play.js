@@ -75,6 +75,15 @@ function listObjs() {
                     li.appendChild(au);
                     var task = Number(obj.Key.slice(obj.Key.lastIndexOf('/') + 1, obj.Key.lastIndexOf('/') + 2));
 
+                    if (task == 3) {
+
+                      var button = document.createElement('button');
+                      button.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
+
+                      button.onclick(playThree(au.id));
+                      li.appendChild(button);
+                    }
+
                     elTask[task].appendChild(li);
                 });
             });
@@ -157,6 +166,19 @@ function playTwo() {
   for (var i = 0; i < a.length; i++) {
     a[i].play();
   }
+}
+
+function playThree(audioId) {
+
+  player2.stopVideo();
+
+  document.querySelectorAll('audio').forEach(function(item) {
+
+    item.pause();
+  });
+
+  document.getElementById(audioId).play();
+  player2.playVideo();
 }
 
 window.fbAsyncInit = function() {
