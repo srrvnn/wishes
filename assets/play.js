@@ -80,7 +80,7 @@ function listObjs() {
                       var button = document.createElement('button');
                       button.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
 
-                      button.onclick(playThree(au.id));
+                      button.onclick('playThree(' + au.id + ')');
                       li.appendChild(button);
                     }
 
@@ -171,11 +171,6 @@ function playTwo() {
 function playThree(audioId) {
 
   player2.stopVideo();
-
-  document.querySelectorAll('audio').forEach(function(item) {
-
-    item.pause();
-  });
 
   document.getElementById(audioId).play();
   player2.playVideo();
