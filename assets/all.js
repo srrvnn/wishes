@@ -41,6 +41,12 @@ function chooseSection(e) {
 
   if (e.target.tagName !== 'LI') return;
 
+  recorder && recorder.stop();
+
+  recordingSvg.style.display = 'none';
+  elStopButton.disabled = true;
+  elRecordButton.disabled = false;
+
   elHeader.className = 'shorten';
   elIntro.style.display = 'none';
 
