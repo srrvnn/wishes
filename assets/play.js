@@ -149,7 +149,7 @@ function statusChange(response) {
 
 function playTwo() {
 
-  var a = document.querySelectorAll('#test-two > div > audio');
+  var a = document.querySelectorAll('#task-two > div > audio');
 
   player1.setVolume(20);
   player1.playVideo();
